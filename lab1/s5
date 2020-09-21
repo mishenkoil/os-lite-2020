@@ -1,0 +1,10 @@
+#!/bin/bash
+
+while read line
+do
+if [[ "$line" == *"] (II)"* ]]
+then
+info="$info$line\n"
+fi
+done < /home/mishenkoil/.local/share/xorg/Xorg.0.log
+echo -e "$info" > info.log
