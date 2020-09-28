@@ -1,15 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 
-while read line
-do
-if [[ "$line" == *"] (II)"* ]]
-then
-info="$info$line\n"
-fi
-if [[ "$line" == *"] (WW)"* ]]
-then
-warnings="$warnings$line\n"
-fi
-done < /home/mishenkoil/.local/share/xorg/Xorg.0.log
-echo -e "$warnings" | sed 's/(WW)/Warning:/' > full.log
-echo -e "$info" | sed 's/(II)/Information:/' >> full.log
+grep "WW" ~/.local/share/xorg/Xorg.0.log | sed 's/(WW)/Worning:/' > full.log
+grep "II" ~/.local/share/xorg/Xorg.0.log | sed 's/(II)/Information:/' >> full.log
