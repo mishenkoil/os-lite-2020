@@ -1,0 +1,4 @@
+#!/bin/bash
+# -u - select by user ID; o - user-defined format
+ps -u mishenkoil o pid,command | tail -n +2 | awk '{print $1" "$2}'> ans1
+wc -l ans1 | awk '{print $1}'

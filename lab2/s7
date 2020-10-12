@@ -1,0 +1,30 @@
+#! /bin/bash
+
+for pid in $(ps -e o pid | tail -n +2)
+do
+path_io="/proc/$pid/io"
+if [[ -f $path_io ]]
+then
+mem=$(grep -w "write_bytes:" $path_io | awk '{print $2}')
+echo "$pid $mem" >> tmp1
+fi
+done
+
+echo "wait 1 min for result"
+sleep 60
+
+for pid in $(ps -e o pid | tail -n +2)
+do
+path_io="/proc/$pid/io"
+if [[ -f $path_io ]]
+then
+mem_final=$(grep -w "write_bytes:" $path_io | awk '{print $2}')
+mem_start=$(grep -w "$pid" tmp1 | awk '{print $2}')
+mem=$(echo "$mem_final - $mem_start" | bc -l)
+echo "$pid $mem" >> tmp2
+fi
+done
+
+sort -n -k2 tmp2 | tail -n  3 | awk '{print "PID="$1" : IO_Mem="$2}'
+rm tmp1
+rm tmp2

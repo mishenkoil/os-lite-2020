@@ -1,0 +1,18 @@
+#! /bin/bash
+
+for pid in $(ps -e o pid | tail -n +2)
+do
+path_status="/proc/$pid/status"
+
+if [[ -f $path_status ]]
+then
+mem=$(grep "VmData:" $path_status | awk '{print $2}')
+if [[ "$ans_mem" -lt "$mem" ]]
+then
+ans_mem=$mem
+ans_pid=$pid
+fi
+fi
+
+done
+echo "Pid:$ans_pid Mem:$ans_mem"
