@@ -1,2 +1,2 @@
-# os-lite-2019
+# os-lite-2020
 OS ITMO fall course
