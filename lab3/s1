@@ -1,0 +1,10 @@
+#!/bin/bash
+
+success_message="catalog test was created successfully"
+failed_ping="www.net_nikogo.ru’s server IP address could not be found"
+new_dir=~/test
+# %F-date, %R-time
+new_file=$new_dir/$(date +%F-%R)
+rm -r $new_dir
+mkdir $new_dir && { echo $success_message >> ~/report ; touch $new_file; }
+ping -c 1 www.net_nikogo.ru || echo $failed_ping >> ~/report
