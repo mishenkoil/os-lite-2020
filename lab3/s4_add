@@ -1,6 +1,6 @@
 #! /bin/bash
-echo $$
-while [[ true ]]
+echo $$ >> pids
+while :
 do
  smt=3*2
 done 

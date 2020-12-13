@@ -1,26 +1,15 @@
 #! /bin/bash
 
-./s4_add&pid1=$!
-./s4_add&pid2=$!
-./s4_add&pid3=$!
+> pids
+
+./s4_add &
+./s4_add &
+./s4_add &
+
+pid1=$(cat pids | head -n 1)
+pid3=$(cat pids | tail -n 1)
 
 max_cpu=10
 
-renice -n 6 -p $pid1
-
-while [ true ] 
-do
-	sleep 30
-	cpu=$(ps -p $pid1 -o pcpu | tail -n 1)
-	echo $cpu
-	if (( $(echo "$max_cpu < $cpu" |bc -l) ))
-	then
-		new_nice=$(ps -p $pid1 -o ni | tail -n 1)
-		if [[ $new_nice -le 19 ]]
-		then		
-			new_nice=$(($new_nice+1))
-		fi
-		echo $new_nice
-		renice -n $new_nice -p $pid1
-	fi 
-done 
+cpulimit -l $max_cpu -p $pid1 &
+kill $pid3

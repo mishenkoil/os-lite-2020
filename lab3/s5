@@ -7,23 +7,20 @@ num=1
 while true; do 
 	read line;
 	echo "$line"
-	case $line in
-        "+")
-            mode="+"
-            echo "+"
-            ;;
-        "*")
-            mode="*"
-            echo 'djfk'
-            ;;
-        "QUIT")
-            echo "exit"
+        if [[ "$line" == "+" ]]
+	then
+		mode="+"
+	elif [[ "$line" == "*" ]]
+	then
+		mode="*"
+	elif [[ "$line" == "QUIT" ]]
+	then
+		echo "exit"
        		killall tail
-
-            exit 0
-            ;;
-        [0-9]*)
-            case $mode in
+        	exit 0
+	elif [[ "$line" =~ ^-?[0-9]+$ ]]
+	then
+		case $mode in
                 "+")
                     echo "Sum" $num "and " $line						
                     num=$(($num + $line))
@@ -34,12 +31,11 @@ while true; do
                     num=$(($num * $line))
                     echo "result " $num
                     ;;
-            esac
-            ;;
-        *) 
-	    echo "INCORRECT input"	
-	    killall tail
-            exit 1
-            ;;
-    esac
+        	esac
+
+	else
+		echo "INCORRECT input"	
+		killall tail
+        	exit 1
+	fi
 done
