@@ -1,0 +1,23 @@
+#!/bin/bash
+output_dir="/home/mishenkoil/lab4/output"
+if [[ $# -ne 1 ]] || [[ $1 == *"/"* ]]; then
+	exit 1
+fi
+
+home_dir="$HOME"
+filename=$1
+if ! [ -f $output_dir/$filename ]; then
+	echo 'No file named' $filename
+	exit 1
+fi
+
+mkdir $home_dir/.trash
+
+number=$(($(ls $home_dir/.trash | wc -l) + 1))
+
+ln -P $output_dir/$filename $home_dir/.trash/$number
+rm $output_dir/$filename
+touch $home_dir/.trash.log
+echo $output_dir/$filename $number >> $home_dir/.trash.log
+
+

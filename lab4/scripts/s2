@@ -1,0 +1,42 @@
+#!/bin/bash
+output_dir="/home/mishenkoil/lab4/output"
+home_dir="$HOME"
+if [[ $# -ne 1 ]] || [[ $1 == *"/"* ]]; then
+	exit 1
+fi
+
+file_to_restore=$1
+
+exec 9< "$HOME/.trash.log"
+while read -u 9 str
+	do
+	stringarray=($str)
+	file_full_path=${stringarray[0]}
+	link_name=${stringarray[1]}
+	file_name="${file_full_path##*/}"
+	file_path=${file_full_path%"$file_name"*}
+	if [[ -e $file_path$file_name ]]; then
+				echo "File or directory with this name already exists."
+				exit 1
+	fi
+	if [[ $file_name == *$file_to_restore* ]]; then
+		echo -e $file_path "\nDo you want to restore it?\n1-yes\n2-no"
+		read answer
+		if [[ $answer -eq 1 ]]; then
+			if [ ! -d $file_path ]; then
+				$file_path=$home_dir
+			fi
+			if [[ -e $file_path$file_name ]]; then
+				echo "File or directory with this name already exists. Please enter a new name:"
+				read file_name
+			fi
+			ln -P $home_dir/.trash/$link_name $file_path$file_name
+			rm $home_dir/.trash/$link_name
+		elif [[ ! $answer -eq 2 ]]; then
+			echo "Wrong input"
+			exit 1	
+		fi
+	fi
+
+done 
+exec 9<&-
