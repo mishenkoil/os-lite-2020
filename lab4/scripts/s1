@@ -1,12 +1,14 @@
 #!/bin/bash
 output_dir="/home/mishenkoil/lab4/output"
-if [[ $# -ne 1 ]] || [[ $1 == *"/"* ]]; then
+if [[ $# -ne 1 ]] || [[ $1 == *"/"* ]]; 
+then
 	exit 1
 fi
 
 home_dir="$HOME"
 filename=$1
-if ! [ -f $output_dir/$filename ]; then
+if ! [ -f $output_dir/$filename ]; 
+then
 	echo 'No file named' $filename
 	exit 1
 fi

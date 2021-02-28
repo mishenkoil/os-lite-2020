@@ -5,21 +5,25 @@ interval=604800
 backups=$(ls $home_dir | grep -o -E "Backup-[0-9]{4}-[0-9]{2}-[0-9]{2}")
 last_backup=$(echo $backups | awk '{print $NF}')
 old_folder_name=""
-if [ ! -z $last_backup ]; then
+if [ ! -z $last_backup ] 
+	then
 	current_date_seconds=$(date +%s)
 	last_backup_date=${last_backup#*"Backup-"*}
 	last_backup_date_seconds=$(date +%s -d $last_backup_date)
-	if [[ $(($current_date_seconds-$last_backup_date_seconds)) -lt $interval ]]; then
+	if [[ $(($current_date_seconds-$last_backup_date_seconds)) -lt $interval ]]
+	then
 		old_folder_name="$home_dir/$last_backup"
 	fi
 fi
-if [ -z $old_folder_name ]; then
+if [ -z $old_folder_name ]
+	then
 	folder_name=$home_dir/Backup-$script_date
 	mkdir $folder_name
 	echo "$folder_name $script_date New backup directory created" >> "$home_dir/backup-report"
 	for entry in "$home_dir/source"/*
 	do
-		if [ -f "$entry" ]; then
+		if [ -f "$entry" ]
+		then
 			cp $entry $folder_name
 			echo $entry >> "$home_dir/backup-report"
 		fi
@@ -30,15 +34,18 @@ else
 	old_filenames="\n"
 	for entry in "$home_dir/source"/*
 	do
-		if [ -f "$entry" ]; then
+		if [ -f "$entry" ]
+		then
 			file_name="${entry##*/}"
-			if [ ! -f "$old_folder_name/$file_name" ]; then
+			if [ ! -f "$old_folder_name/$file_name" ]
+			then
 				new_filenames="$new_filenames$old_folder_name/$file_name\n"
 				cp $entry $old_folder_name
 			else
 				backup_file_size=$(wc -c <"$old_folder_name/$file_name")
 				source_file_size=$(wc -c <"$entry")	
-				if [[ $backup_file_size -ne $source_file_size ]]; then
+				if [[ $backup_file_size -ne $source_file_size ]]
+				then
 					old_filenames="$old_filenames$old_folder_name/$file_name $old_folder_name/$file_name.$script_date\n"
 					mv "$old_folder_name/$file_name" "$old_folder_name/$file_name.$script_date"
 					cp $entry "$old_folder_name/$file_name"
@@ -46,10 +53,12 @@ else
 			fi
 		fi
 	done
-	if [ "\n" != "$new_filenames" ]; then
+	if [ "\n" != "$new_filenames" ]
+	then
 		printf "$new_filenames" >> "$home_dir/backup-report"
 	fi
-	if [ "\n" != "$old_filenames" ]; then
+	if [ "\n" != "$old_filenames" ]
+	then
 		printf "$old_filenames\n" >> "$home_dir/backup-report"
 	fi
 fi

@@ -5,7 +5,7 @@ N=$1
 K=$2
 while [[ "$cnt" -ne "$K" ]]
 do
-    ./newmem.bash "$N" &
+    ./newmem "$N" &
     cnt=$(($cnt+1))
     sleep 1s
 done

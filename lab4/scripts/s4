@@ -3,13 +3,15 @@ home_dir="$HOME"
 mkdir "$home_dir/restore"
 backups=$(ls $home_dir | grep -o -E "Backup-[0-9]{4}-[0-9]{2}-[0-9]{2}")
 last_backup=$(echo $backups | awk '{print $NF}')
-if [ -z $last_backup ]; then
+if [ -z $last_backup ]
+	then
 	echo "No backups found"
 	exit 1
 fi
 for entry in "$home_dir/$last_backup"/*
 	do
-	if [[ ! "$entry" =~ .*\.[0-9]{4}-[0-9]{2}-[0-9]{2} ]]; then
+	if [[ ! "$entry" =~ .*\.[0-9]{4}-[0-9]{2}-[0-9]{2} ]]
+	then
 		cp $entry "$home_dir/restore"
 	fi
 done
