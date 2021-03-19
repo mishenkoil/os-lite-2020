@@ -6,16 +6,16 @@
 
  * *Лабораторная №2*
       * [Реализация](https://github.com/mishenkoil/os-lite-2020/tree/master/lab2)
-      * [Условия](https://github.com/mishenkoil/os-lite-2020/blob/master/lab1/OS_Lab2.pdf)
+      * [Условия](https://github.com/mishenkoil/os-lite-2020/blob/master/lab2/OS_Lab2.pdf)
 
  * *Лабораторная №3*
       * [Реализация](https://github.com/mishenkoil/os-lite-2020/tree/master/lab3)
-      * [Условия](https://github.com/mishenkoil/os-lite-2020/blob/master/lab1/OS_Lab3.pdf)
+      * [Условия](https://github.com/mishenkoil/os-lite-2020/blob/master/lab3/OS_Lab3.pdf)
 
  * *Лабораторная №4*
       * [Реализация](https://github.com/mishenkoil/os-lite-2020/tree/master/lab4)
-      * [Условия](https://github.com/mishenkoil/os-lite-2020/blob/master/lab1/OS_Lab4.pdf)
+      * [Условия](https://github.com/mishenkoil/os-lite-2020/blob/master/lab4/OS_Lab4.pdf)
 
  * *Лабораторная №5*
       * [Реализация](https://github.com/mishenkoil/os-lite-2020/tree/master/lab5)
-      * [Условия](https://github.com/mishenkoil/os-lite-2020/blob/master/lab1/OS_Lab5.pdf)
+      * [Условия](https://github.com/mishenkoil/os-lite-2020/blob/master/lab5/OS_Lab5.pdf)
