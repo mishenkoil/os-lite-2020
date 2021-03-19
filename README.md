@@ -19,3 +19,4 @@
  * *Лабораторная №5*
       * [Реализация](https://github.com/mishenkoil/os-lite-2020/tree/master/lab5)
       * [Условия](https://github.com/mishenkoil/os-lite-2020/blob/master/lab5/OS_Lab5.pdf)
+      * [Отчет](https://github.com/mishenkoil/os-lite-2020/blob/master/lab5/5lab_os.ipynb)
